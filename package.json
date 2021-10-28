@@ -1,7 +1,7 @@
 {
   "name": "@wal3/rc-login",
-  "version": "1.0.0",
-  "description": "Made with create-react-library",
+  "version": "0.1.0",
+  "description": "Login Component",
   "author": "worthlutz",
   "license": "MIT",
   "repository": "worthlutz/rc-login",
@@ -49,5 +49,10 @@
   },
   "files": [
     "dist"
-  ]
+  ],
+  "dependencies": {
+    "prop-types": "^15.7.2",
+    "react-responsive-modal": "^6.1.0",
+    "styled-components": "^5.3.3"
+  }
 }
