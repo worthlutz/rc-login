@@ -1,5 +1,5 @@
 import { Login } from '@wal3/rc-login'
-import '@wal3/rc-login/dist/index.css'
+//import '@wal3/rc-login/dist/index.css'
 
 import MyApplication from './MyApplication'
 import logo from './1R0Sa.png'

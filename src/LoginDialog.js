@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import PropTypes from 'prop-types'
-import styled from 'styled-components'
+import styled from '@emotion/styled'
 
 import TextInput from './TextInput'
 
@@ -16,7 +16,7 @@ const ButtonContainer = styled.div`
 `
 const Button = styled.button`
   height: 25px;
-  width:  75px;
+  width: 75px;
   margin: 0px 10px;
 `
 // TODO: work on Link
@@ -51,9 +51,9 @@ button.link:focus span {
 <button type="submit" class="link"><span>Button as Link</span></button>
 */
 const Link = styled.button`
-  background: none!important;
+  background: none !important;
   border: none;
-  padding: 0!important;
+  padding: 0 !important;
   /*optional*/
   /*font-family: arial, sans-serif;*/
   /*input has OS specific font-family*/
@@ -102,7 +102,7 @@ export default function LoginDialog({
   onCancel = null,
   onSubmit,
   onForgotPassword = null,
-  onRegister = null
+  onRegister = null,
 }) {
   console.warn('************ RENDERING LoginDialog ************')
   console.log(message)
@@ -116,10 +116,10 @@ export default function LoginDialog({
     if (!userEmail || !password) {
       setMessage('User Id and Password are required!')
     } else {
-      const user = emailDomain ? userEmail + '@' + emailDomain : userEmail
+      const user = emailDomain ? `${userEmail}@${emailDomain}` : userEmail
       const credentials = {
         userEmail: user,
-        password: password
+        password,
       }
       onSubmit(credentials)
     }
@@ -156,7 +156,7 @@ export default function LoginDialog({
             value={userEmail}
             changeHandler={userEmailChangeHandler}
             width={emailDomain ? '80px' : null}
-            suffix={emailDomain ? '@' + emailDomain : false}
+            suffix={emailDomain ? `@${emailDomain}` : false}
           />
           <TextInput
             label='Password:'
@@ -166,9 +166,13 @@ export default function LoginDialog({
           />
           <ButtonContainer>
             {onForgotPassword ? (
+              // eslint-disable-next-line jsx-a11y/anchor-is-valid
               <Link onClick={onForgotPassword}>forgot password?</Link>
             ) : null}
-            {onRegister ? <Link onClick={onRegister}>register</Link> : null}
+            {onRegister ? (
+              // eslint-disable-next-line jsx-a11y/anchor-is-valid
+              <Link onClick={onRegister}>register</Link>
+            ) : null}
           </ButtonContainer>
         </Form>
         <Text>{msg}</Text>
@@ -186,5 +190,5 @@ export default function LoginDialog({
 LoginDialog.propTypes = {
   message: PropTypes.string,
   onCancel: PropTypes.func,
-  onSubmit: PropTypes.func.isRequired
+  onSubmit: PropTypes.func.isRequired,
 }

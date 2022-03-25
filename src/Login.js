@@ -12,10 +12,10 @@ const modalStyle = {
   minHeight: '250px',
   minWidth: '375px',
   backgroundColor: 'lightgrey',
-  zIndex: 1000
+  zIndex: 1000,
 }
 const overlayStyle = {
-  backgroundColor: 'darkgrey'
+  backgroundColor: 'darkgrey',
   // background: 'rgba(36, 123, 160, 0.7)',
 }
 
@@ -38,23 +38,19 @@ const Login = ({ children, loginDialog, onDialogSubmit, ...rest }) => {
     // should also return isLoading?
     try {
       setMessage('Authorizing...')
-      const payload = await onDialogSubmit(credentials)
-      setPayload(payload)
+      const result = await onDialogSubmit(credentials)
+      setPayload(result)
       setMessage(null)
       setIsLoggedIn(true)
     } catch (err) {
-      console.log(err.message);
+      console.log(err.message)
       setMessage(err.message)
     }
   }
 
   const contextValue = useMemo(
-    () => ({
-      isLoggedIn: isLoggedIn,
-      logout: logout,
-      payload: payload
-    }),
-    [isLoggedIn, payload]
+    () => ({ isLoggedIn, logout, payload }),
+    [isLoggedIn, payload],
   )
 
   console.log(contextValue)
@@ -72,7 +68,7 @@ const Login = ({ children, loginDialog, onDialogSubmit, ...rest }) => {
         center
         styles={{
           modal: modalStyle,
-          overlay: overlayStyle
+          overlay: overlayStyle,
         }}
         closeIconSize={20}
         showCloseIcon={false}
@@ -95,8 +91,8 @@ const Login = ({ children, loginDialog, onDialogSubmit, ...rest }) => {
 
 // these props are for Login - any others are passed on to LoginDialog (...rest)
 Login.propTypes = {
-  loginDialog: PropTypes.func,  // optional replacement LoginDialog
-  onDialogSubmit: PropTypes.func.isRequired
+  loginDialog: PropTypes.func, // optional replacement LoginDialog
+  onDialogSubmit: PropTypes.func.isRequired,
 }
 
 export default Login

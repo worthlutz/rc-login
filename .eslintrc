@@ -1,16 +1,16 @@
 {
-  "parser": "babel-eslint",
+  "parser": "@babel/eslint-parser",
   "extends": [
-    "standard",
-    "standard-react",
-    "react",
-    "plugin:prettier/recommended",
-    "prettier"
+    "@imaginary-cloud/react"
   ],
   "env": {
     "node": true
   },
   "parserOptions": {
+    "requireConfigFile": false,
+    "babelOptions": {
+      "presets": ["@babel/preset-react"]
+    },
     "ecmaVersion": 2020,
     "ecmaFeatures": {
       "legacyDecorators": true,
@@ -19,11 +19,12 @@
   },
   "settings": {
     "react": {
-      "version": "17"
+      "version": "detect"
     }
   },
   "rules": {
     "space-before-function-paren": 0,
+    "react/function-component-definition": 0,
     "react/prop-types": 0,
     "react/jsx-handler-names": 0,
     "react/jsx-fragments": 0,

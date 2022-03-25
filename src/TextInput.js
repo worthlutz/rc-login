@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import PropTypes from 'prop-types'
-import styled from 'styled-components'
+import styled from '@emotion/styled'
 
 const Container = styled.div`
   margin: 10px;
@@ -10,35 +10,45 @@ const Label = styled.label`
   width: 85px;
 `
 
-export default function TextInput(props) {
+export default function TextInput({
+  changeHandler,
+  focus,
+  label,
+  suffix,
+  type,
+  width,
+  value,
+}) {
+  // eslint-disable-next-line no-plusplus
   const [nextNum] = useState(TextInput.count++)
-  const id = 'text-input-' + nextNum
+  const id = `text-input-${nextNum}`
 
   console.warn('************ RENDERING TextInput ************')
-  console.log(props)
 
-  const type = props.type ? props.type : 'text'
+  const inputType = type || 'text'
 
-  const style = props.width ? { width: props.width } : null
+  const style = width ? { width } : null
 
   return (
     <Container>
-      <Label htmlFor={id} width={props.width}>
-        {props.label}
+      <Label htmlFor={id} width={width}>
+        {label}
       </Label>
       <input
         id={id}
-        type={type}
-        autoFocus={props.focus}
+        type={inputType}
+        // eslint-disable-next-line jsx-a11y/no-autofocus
+        autoFocus={focus}
         style={style}
-        value={props.value}
+        value={value}
         onChange={(e) => {
-          props.changeHandler(e.target.value)
+          changeHandler(e.target.value)
         }}
         onFocus={(e) => {
           e.target.select()
         }}
-      /> {props.suffix}
+      />
+      {` ${suffix || ''}`}
     </Container>
   )
 }
@@ -48,6 +58,8 @@ TextInput.propTypes = {
   changeHandler: PropTypes.func,
   focus: PropTypes.bool,
   label: PropTypes.string,
+  suffix: PropTypes.string,
   type: PropTypes.string,
-  value: PropTypes.any
+  width: PropTypes.number,
+  value: PropTypes.any,
 }
